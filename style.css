@@ -53,9 +53,37 @@ header {
     padding: 10px;
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    max-width: 200px;
+    max-width: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
 #chatbox.hidden {
     display: none;
+}
+
+#chat-messages {
+    max-height: 150px;
+    overflow-y: auto;
+    font-size: 0.9em;
+}
+
+.chat-input-area {
+    display: flex;
+    gap: 4px;
+}
+
+#chat-input {
+    flex: 1;
+    padding: 4px;
+}
+
+#chat-send {
+    padding: 4px 8px;
+}
+
+.user-message {
+    text-align: right;
+    margin: 2px 0;
 }
