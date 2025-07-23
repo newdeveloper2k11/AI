@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mindful Meditation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Mindful Meditation</h1>
+    </header>
+    <main>
+        <section id="tips">
+            <h2>Meditation Tips</h2>
+            <ul>
+                <li>Find a quiet space.</li>
+                <li>Focus on your breath.</li>
+                <li>Let thoughts pass without judgment.</li>
+            </ul>
+        </section>
+    </main>
+    <div id="chatbot">
+        <button id="chat-toggle">Chat</button>
+        <div id="chatbox" class="hidden">
+            <p>Hello! How can I help with your meditation practice?</p>
+        </div>
+    </div>
+    <script>
+        const toggle = document.getElementById('chat-toggle');
+        const chatbox = document.getElementById('chatbox');
+        toggle.addEventListener('click', () => {
+            chatbox.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
