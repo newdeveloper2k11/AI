@@ -24,14 +24,41 @@
     <div id="chatbot">
         <button id="chat-toggle">Chat</button>
         <div id="chatbox" class="hidden">
-            <p>Hello! How can I help with your meditation practice?</p>
+            <div id="chat-messages"></div>
+            <div class="chat-input-area">
+                <input type="text" id="chat-input" placeholder="Type a message...">
+                <button id="chat-send">Send</button>
+            </div>
         </div>
     </div>
     <script>
         const toggle = document.getElementById('chat-toggle');
         const chatbox = document.getElementById('chatbox');
+        const messages = document.getElementById('chat-messages');
+        const input = document.getElementById('chat-input');
+        const sendButton = document.getElementById('chat-send');
         toggle.addEventListener('click', () => {
             chatbox.classList.toggle('hidden');
+        });
+
+        function sendMessage() {
+            const text = input.value.trim();
+            if (text !== '') {
+                const p = document.createElement('p');
+                p.textContent = text;
+                p.classList.add('user-message');
+                messages.appendChild(p);
+                input.value = '';
+                messages.scrollTop = messages.scrollHeight;
+            }
+        }
+
+        sendButton.addEventListener('click', sendMessage);
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                sendMessage();
+            }
         });
     </script>
 </body>
