@@ -32,25 +32,55 @@
         </div>
     </div>
     <script>
+        const OPENAI_API_KEY = '';
         const toggle = document.getElementById('chat-toggle');
         const chatbox = document.getElementById('chatbox');
         const messages = document.getElementById('chat-messages');
         const input = document.getElementById('chat-input');
         const sendButton = document.getElementById('chat-send');
+
         toggle.addEventListener('click', () => {
             chatbox.classList.toggle('hidden');
         });
 
         function sendMessage() {
             const text = input.value.trim();
-            if (text !== '') {
-                const p = document.createElement('p');
-                p.textContent = text;
-                p.classList.add('user-message');
-                messages.appendChild(p);
-                input.value = '';
+            if (text === '') return;
+
+            const userP = document.createElement('p');
+            userP.textContent = text;
+            userP.classList.add('user-message');
+            messages.appendChild(userP);
+            input.value = '';
+            messages.scrollTop = messages.scrollHeight;
+
+            const botP = document.createElement('p');
+            botP.textContent = 'Thinking...';
+            botP.classList.add('assistant-message');
+            messages.appendChild(botP);
+            messages.scrollTop = messages.scrollHeight;
+
+            fetch('https://api.openai.com/v1/chat/completions', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + OPENAI_API_KEY
+                },
+                body: JSON.stringify({
+                    model: 'gpt-4o',
+                    messages: [{ role: 'user', content: text }]
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                const reply = data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content;
+                botP.textContent = reply || 'Failed to get reply.';
                 messages.scrollTop = messages.scrollHeight;
-            }
+            })
+            .catch(err => {
+                console.error(err);
+                botP.textContent = 'Error. Please try again.';
+            });
         }
 
         sendButton.addEventListener('click', sendMessage);
