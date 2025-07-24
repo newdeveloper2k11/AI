@@ -151,7 +151,7 @@
             chatArea.appendChild(userDiv);
 
             const botDiv = document.createElement('div');
-            botDiv.textContent = '...';
+            botDiv.textContent = 'Thinking...';
             botDiv.classList.add('assistant-message');
             chatArea.appendChild(botDiv);
 
@@ -177,7 +177,7 @@
             })
             .catch(err => {
                 console.error(err);
-                botDiv.textContent = 'Error. Please try again.';
+                botDiv.textContent = 'Sorry, there was a problem. Please try again.';
             });
         }
 
