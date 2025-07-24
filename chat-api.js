@@ -28,6 +28,9 @@ app.post('/api/chat', async (req, res) => {
     res.json({ reply });
   } catch (err) {
     console.error(err);
+    if (err.response) {
+      console.error(err.response.data || err.response);
+    }
     res.json({ reply: 'Failed to get reply.' });
   }
 });
