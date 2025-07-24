@@ -87,3 +87,8 @@ header {
     text-align: right;
     margin: 2px 0;
 }
+
+.assistant-message {
+    text-align: left;
+    margin: 2px 0;
+}
